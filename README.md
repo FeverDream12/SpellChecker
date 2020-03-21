@@ -1,1 +1,1 @@
-# SpellChecker
+# SpellChecker project
