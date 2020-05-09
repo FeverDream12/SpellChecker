@@ -10,5 +10,7 @@ int main()
     cout << "Enter text" << endl;
     inputText();
     string inputFile = "input.txt";
+    string cleanText = "clean.txt";
+    clearText(inputFile, cleanText);
     return 0;
 }
