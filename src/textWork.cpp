@@ -11,3 +11,16 @@ string lowerCase(string& str)
     }
     return str;
 }
+
+void inputText()
+{
+    ofstream write;
+    string inputFile = "input.txt";
+    write.open(inputFile);
+    string text;
+
+    getline(cin, text);
+    write << text;
+
+    write.close();
+}
