@@ -14,7 +14,7 @@ all: ./bin/SpellChecker
 ./build/textWork.o: ./src/textWork.cpp
 		$(g) $(CFLAGS) -o build/textWork.o -c src/textWork.cpp -lm
 
-./build/source.o: ./src/source.cpp
+./build/source.o: ./src/source.cpp ./src/textWork.h
 		$(g) $(CFLAGS) -o build/source.o -c src/source.cpp -lm
 
 clean:
