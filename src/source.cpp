@@ -22,3 +22,17 @@ void introduceDictionary(string filename)
         cout << "Can't open file: " << filename << endl;
     }
 }
+
+string excessLetter(string word)
+{
+    string result;
+    int wordSize = word.size();
+    for (int i = 0; i < wordSize; ++i) {
+        string newWord = word;
+        newWord = newWord.erase(i, 1);
+        if (Dictionary.find(newWord) != Dictionary.end()) {
+            result = result + newWord + " ";
+        }
+    }
+    return result;
+}
