@@ -15,5 +15,6 @@ int main()
     string dictFile = "dictionary.txt";
     clearText(inputFile, cleanText);
     introduceDictionary(dictFile);
+    checkText(cleanText);
     return 0;
 }

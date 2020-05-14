@@ -36,3 +36,32 @@ string excessLetter(string word)
     }
     return result;
 }
+
+void checkText(string filename)
+{
+    ifstream readFile;
+    readFile.open(filename);
+    if (readFile.is_open()) {
+        string word;
+        while (readFile >> word) {
+            lowerCase(word);
+            cout << word;
+            if (Dictionary.find(word) != Dictionary.end()) {
+                cout << " -> correct word" << endl;
+            } else {
+                string altWordList = excessLetter(word);
+                if (altWordList.empty()) {
+                    cout << " -> unknown or nonexistent word" << endl;
+                } else {
+                    cout << " -> uncorrect word, maybe you mean -->> ";
+                    for (auto altWord : altWordList) {
+                        cout << altWord;
+                    }
+                    cout << endl;
+                }
+            }
+        }
+    } else {
+        cout << "Не удалось открыть файл: " << filename << endl;
+    }
+}
