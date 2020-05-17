@@ -54,9 +54,7 @@ void checkText(string filename)
                     cout << " -> unknown or nonexistent word" << endl;
                 } else {
                     cout << " -> uncorrect word, maybe you mean -->> ";
-                    for (auto altWord : altWordList) {
-                        cout << altWord;
-                    }
+                    cout << altWordList;
                     cout << endl;
                 }
             }
