@@ -6,8 +6,8 @@ using namespace std;
 
 string lowerCase(string& str)
 {
-    for (auto& chr : str) {
-        chr = tolower(chr);
+    for (int i = 0; str[i] != '\0'; i++) {
+        str[i] = tolower(str[i]);
     }
     return str;
 }
