@@ -18,6 +18,21 @@ TEST_CASE("Helplo", "Correct")
     REQUIRE(excessLetter("appple", introduceDictionary(dictFile)) == "apple");
     REQUIRE(excessLetter("adapft", introduceDictionary(dictFile)) == "adapt");
     REQUIRE(excessLetter("beltl", introduceDictionary(dictFile)) == "belt");
-    REQUIRE(excessLetter("aobvious", introduceDictionary(dictFile)) == "obvious");
+    REQUIRE(excessLetter("aobvious", introduceDictionary(dictFile))
+            == "obvious");
     REQUIRE(excessLetter("sfmooth", introduceDictionary(dictFile)) == "smooth");
+}
+
+TEST_CASE("lowerCase", "CorrectWork")
+{
+    string str_1 = "APPLE";
+    REQUIRE(lowerCase(str_1) == "apple");
+    string str_2 = "AiR";
+    REQUIRE(lowerCase(str_2) == "air");
+    string str_3 = "Achievement";
+    REQUIRE(lowerCase(str_3) == "achievement");
+    string str_4 = "CheRRy";
+    REQUIRE(lowerCase(str_4) == "cherry");
+    string str_5 = "abuse";
+    REQUIRE(lowerCase(str_5) == "abuse");
 }
