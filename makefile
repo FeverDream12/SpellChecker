@@ -17,6 +17,17 @@ all: ./bin/SpellChecker
 ./build/source.o: ./src/source.cpp ./src/textWork.h
 		$(g) $(CFLAGS) -o build/source.o -c src/source.cpp -lm
 
+test: bin/spell-test
+
+bin/spell-test: build/test/main.o build/source.o build/textWork.o
+		$(g) -o bin/spell-test build/test/main.o build/source.o build/textWork.o
+
+build/test/main.o: test/main.cpp
+		$(g) $(CFLAGS) -o build/test/main.o -c test/main.cpp
+
+testRun:
+	./bin/spell-test
+
 clean:
 	rm -rf build/*.o build/*.d
 
