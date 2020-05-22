@@ -36,3 +36,12 @@ TEST_CASE("lowerCase", "CorrectWork")
     string str_5 = "abuse";
     REQUIRE(lowerCase(str_5) == "abuse");
 }
+
+TEST_CASE("Missing Letter", "Correct")
+{
+    string dictFile = "dictionary.txt";
+    REQUIRE(missingLetter("blok", introduceDictionary(dictFile)) == "block");
+    REQUIRE(missingLetter("pple", introduceDictionary(dictFile)) == "apple");
+    REQUIRE(missingLetter("joe", introduceDictionary(dictFile)) == "joke");
+    REQUIRE(missingLetter("wor", introduceDictionary(dictFile)) == "work");
+}
