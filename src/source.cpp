@@ -63,3 +63,27 @@ void checkText(string filename, unordered_set<string> Dictionary)
         cout << "Не удалось открыть файл: " << filename << endl;
     }
 }
+
+string missingLetter(string word, unordered_set<string> Dictionary)
+{
+    int flag = 0;
+    string alfavit = "abcdefghijklmnopqrstuvwxyz";
+    string result;
+    string newWord = "_" + word;
+    int wordSize = newWord.size();
+    for (int i = 0; i < wordSize; i++) {
+        for (int j = 0; j < 27; j++) {
+            newWord[i] = alfavit[j];
+            if (Dictionary.find(newWord) != Dictionary.end()) {
+                result = newWord;
+                flag = 1;
+            }
+        }
+        if (flag) {
+            break;
+        } else {
+            swap(newWord[i], newWord[i + 1]);
+        }
+    }
+    return result;
+}
