@@ -45,3 +45,12 @@ TEST_CASE("Missing Letter", "Correct")
     REQUIRE(missingLetter("joe", introduceDictionary(dictFile)) == "joke");
     REQUIRE(missingLetter("wor", introduceDictionary(dictFile)) == "work");
 }
+
+TEST_CASE("swapLetters", "CorrectWork")
+{
+    string dictFile = "dictionary.txt";
+    REQUIRE(swapLetters("helol", introduceDictionary(dictFile)) == "hello");
+    REQUIRE(swapLetters("aplpe", introduceDictionary(dictFile)) == "apple");
+    REQUIRE(swapLetters("actino", introduceDictionary(dictFile)) == "action");
+    REQUIRE(swapLetters("abues", introduceDictionary(dictFile)) == "abuse");
+}
