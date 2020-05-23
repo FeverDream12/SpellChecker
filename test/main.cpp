@@ -11,7 +11,7 @@ using namespace std;
 
 unordered_set<string> Dictionary;
 
-TEST_CASE("excessLetter", "Correct")
+TEST_CASE("ExcessLetter", "Correct")
 {
     string dictFile = "dictionary.txt";
     REQUIRE(excessLetter("helplo", introduceDictionary(dictFile)) == "hello");
@@ -52,4 +52,14 @@ TEST_CASE("swapLetters", "CorrectWork")
     REQUIRE(swapLetters("aplpe", introduceDictionary(dictFile)) == "apple");
     REQUIRE(swapLetters("actino", introduceDictionary(dictFile)) == "action");
     REQUIRE(swapLetters("abues", introduceDictionary(dictFile)) == "abuse");
+}
+
+TEST_CASE("WrongLetter", "Correct")
+{
+    string dictFile = "dictionary.txt";
+    REQUIRE(wrongLetter("frink", introduceDictionary(dictFile)) == "drink");
+    REQUIRE(wrongLetter("abone", introduceDictionary(dictFile)) == "alone");
+    REQUIRE(wrongLetter("delp", introduceDictionary(dictFile)) == "help");
+    REQUIRE(wrongLetter("suiside", introduceDictionary(dictFile)) == "suicide");
+    REQUIRE(wrongLetter("death", introduceDictionary(dictFile)) == "death");
 }
