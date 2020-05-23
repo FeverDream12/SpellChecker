@@ -75,6 +75,29 @@ string swapLetters(string word, unordered_set<string> Dictionary)
     return result;
 }
 
+string wrongLetter(string word, unordered_set<string> Dictionary)
+{
+    bool wordFinded = false;
+    string alfavit = "abcdefghijklmnopqrstuvwxyz";
+    string result;
+    string bufWord = word;
+    int wordSize = word.size();
+    for (int i = 0; i < wordSize; i++) {
+        word = bufWord;
+        for (int j = 0; j < 27; j++) {
+            word[i] = alfavit[j];
+            if (Dictionary.find(word) != Dictionary.end()) {
+                result = word;
+                wordFinded = true;
+            }
+        }
+        if (wordFinded) {
+            break;
+        }
+    }
+    return result;
+}
+
 void checkText(string filename, unordered_set<string> Dictionary)
 {
     ifstream read;
