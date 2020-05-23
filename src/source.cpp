@@ -87,3 +87,17 @@ string missingLetter(string word, unordered_set<string> Dictionary)
     }
     return result;
 }
+
+string swapLetters(string word, unordered_set<string> Dictionary)
+{
+    int wordSize = word.size();
+    string result;
+    for (int i = 0; i < wordSize; i++) {
+        string newWord = word;
+        swap(newWord[i], newWord[i + 1]);
+        if (Dictionary.find(newWord) != Dictionary.end()) {
+            result = newWord;
+        }
+    }
+    return result;
+}
