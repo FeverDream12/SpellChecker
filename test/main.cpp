@@ -11,15 +11,14 @@ using namespace std;
 
 unordered_set<string> Dictionary;
 
-TEST_CASE("Helplo", "Correct")
+TEST_CASE("excessLetter", "Correct")
 {
     string dictFile = "dictionary.txt";
     REQUIRE(excessLetter("helplo", introduceDictionary(dictFile)) == "hello");
     REQUIRE(excessLetter("appple", introduceDictionary(dictFile)) == "apple");
     REQUIRE(excessLetter("adapft", introduceDictionary(dictFile)) == "adapt");
     REQUIRE(excessLetter("beltl", introduceDictionary(dictFile)) == "belt");
-    REQUIRE(excessLetter("aobvious", introduceDictionary(dictFile))
-            == "obvious");
+    REQUIRE(excessLetter("blokod", introduceDictionary(dictFile)) == "blood");
     REQUIRE(excessLetter("sfmooth", introduceDictionary(dictFile)) == "smooth");
 }
 
