@@ -37,33 +37,6 @@ string excessLetter(string word, unordered_set<string> Dictionary)
     return result;
 }
 
-void checkText(string filename, unordered_set<string> Dictionary)
-{
-    ifstream readFile;
-    readFile.open(filename);
-    if (readFile.is_open()) {
-        string word;
-        while (readFile >> word) {
-            lowerCase(word);
-            cout << word;
-            if (Dictionary.find(word) != Dictionary.end()) {
-                cout << " -> correct word" << endl;
-            } else {
-                string altWordList = excessLetter(word, Dictionary);
-                if (altWordList.empty()) {
-                    cout << " -> unknown or nonexistent word" << endl;
-                } else {
-                    cout << " -> uncorrect word, maybe you mean -->> ";
-                    cout << altWordList;
-                    cout << endl;
-                }
-            }
-        }
-    } else {
-        cout << "Не удалось открыть файл: " << filename << endl;
-    }
-}
-
 string missingLetter(string word, unordered_set<string> Dictionary)
 {
     int flag = 0;
@@ -100,4 +73,42 @@ string swapLetters(string word, unordered_set<string> Dictionary)
         }
     }
     return result;
+}
+
+void checkText(string filename, unordered_set<string> Dictionary)
+{
+    ifstream read;
+    read.open(filename);
+    if (read.is_open()) {
+        string word;
+        while (read >> word) {
+            lowerCase(word);
+            cout << word;
+            if (Dictionary.find(word) != Dictionary.end()) {
+                cout << " -> correct word" << endl;
+            } else {
+                string wordContainer = swapLetters(word, Dictionary);
+                if (wordContainer.empty()) {
+                    wordContainer = excessLetter(word, Dictionary);
+                    if (wordContainer.empty()) {
+                        wordContainer = missingLetter(word, Dictionary);
+                        if (wordContainer.empty()) {
+                            cout << " -> unknown or nonexistent word" << endl;
+                        } else {
+                            cout << " -> uncorrect word, maybe you mean -->> "
+                                 << wordContainer << endl;
+                        }
+                    } else {
+                        cout << " -> uncorrect word, maybe you mean -->> "
+                             << wordContainer << endl;
+                    }
+                } else {
+                    cout << " -> uncorrect word, maybe you mean -->> "
+                         << wordContainer << endl;
+                }
+            }
+        }
+    } else {
+        cout << "Could not open file: " << filename << endl;
+    }
 }
