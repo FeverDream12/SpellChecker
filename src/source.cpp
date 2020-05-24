@@ -116,7 +116,15 @@ void checkText(string filename, unordered_set<string> Dictionary)
                     if (wordContainer.empty()) {
                         wordContainer = missingLetter(word, Dictionary);
                         if (wordContainer.empty()) {
-                            cout << " -> unknown or nonexistent word" << endl;
+                            wordContainer = wrongLetter(word, Dictionary);
+                            if (wordContainer.empty()) {
+                                cout << " unknown or nonexistent word "
+                                     << wordContainer << endl;
+                            } else {
+                                cout << " -> uncorrect word, maybe you mean "
+                                        "-->> "
+                                     << wordContainer << endl;
+                            }
                         } else {
                             cout << " -> uncorrect word, maybe you mean -->> "
                                  << wordContainer << endl;
@@ -132,6 +140,6 @@ void checkText(string filename, unordered_set<string> Dictionary)
             }
         }
     } else {
-        cout << "Could not open file: " << filename << endl;
+        cout << "Could not open file : " << filename << endl;
     }
 }
