@@ -14,7 +14,6 @@ int main()
     string cleanText = "clean.txt";
     string dictFile = "dictionary.txt";
     clearText(inputFile, cleanText);
-    introduceDictionary(dictFile);
-    checkText(cleanText);
+    checkText(cleanText, introduceDictionary(dictFile));
     return 0;
 }
