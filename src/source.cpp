@@ -37,19 +37,25 @@ string excessLetter(string word, unordered_set<string> Dictionary)
     return result;
 }
 
-string missingLetter(string word, unordered_set<string> Dictionary)
+string missingLetter(string word, unordered_set<string> Dictionary, string& text)
 {
-    int flag = 0;
+    bool find = false;
     string alfavit = "abcdefghijklmnopqrstuvwxyz";
     string result;
     string newWord = "_" + word;
     int wordSize = newWord.size();
     for (int i = 0; i < wordSize; i++) {
-        for (int j = 0; j < 27; j++) {
+        for (int j = 0; j < 26; j++) {
             newWord[i] = alfavit[j];
             if (Dictionary.find(newWord) != Dictionary.end()) {
                 result = newWord;
-                flag = 1;
+                int wordPosition = text.find(word);
+
+                text.replace(
+                        text.begin() + wordPosition,
+                        text.begin() + wordPosition + word.size(),
+                        result);
+                find = true;
             }
         }
         if (flag) {
@@ -75,23 +81,29 @@ string swapLetters(string word, unordered_set<string> Dictionary)
     return result;
 }
 
-string wrongLetter(string word, unordered_set<string> Dictionary)
+string wrongLetter(string word, unordered_set<string> Dictionary, string& text)
 {
-    bool wordFinded = false;
+    bool find =  false;
     string alfavit = "abcdefghijklmnopqrstuvwxyz";
     string result;
-    string bufWord = word;
-    int wordSize = word.size();
+    string newWord = word;
+    int wordSize = newWord.size();
     for (int i = 0; i < wordSize; i++) {
-        word = bufWord;
-        for (int j = 0; j < 27; j++) {
-            word[i] = alfavit[j];
-            if (Dictionary.find(word) != Dictionary.end()) {
-                result = word;
-                wordFinded = true;
+      newWord = word;
+        for (int j = 0; j < 26; j++) {
+            newWord[i] = alfavit[j];
+            if (Dictionary.find(newWord) != Dictionary.end()) {
+                result = newWord;
+                int wordPosition = text.find(word);
+                text.replace(
+                        text.begin() + wordPosition,
+                        text.begin() + wordPosition + word.size(),
+                        result);
+                find = true;
+                break;
             }
         }
-        if (wordFinded) {
+        if (flag) {
             break;
         }
     }
