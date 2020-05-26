@@ -14,12 +14,18 @@ unordered_set<string> Dictionary;
 TEST_CASE("ExcessLetter", "Correct")
 {
     string dictFile = "dictionary.txt";
-    REQUIRE(excessLetter("helplo", introduceDictionary(dictFile)) == "hello");
-    REQUIRE(excessLetter("appple", introduceDictionary(dictFile)) == "apple");
-    REQUIRE(excessLetter("adapft", introduceDictionary(dictFile)) == "adapt");
-    REQUIRE(excessLetter("beltl", introduceDictionary(dictFile)) == "belt");
-    REQUIRE(excessLetter("blokod", introduceDictionary(dictFile)) == "blood");
-    REQUIRE(excessLetter("sfmooth", introduceDictionary(dictFile)) == "smooth");
+    string text = "helplo";
+    REQUIRE(excessLetter("helplo", introduceDictionary(dictFile), text) == "hello");
+    text = "appple";
+    REQUIRE(excessLetter("appple", introduceDictionary(dictFile), text) == "apple");
+    text = "adapft";
+    REQUIRE(excessLetter("adapft", introduceDictionary(dictFile), text) == "adapt");
+    text = "beltl";
+    REQUIRE(excessLetter("beltl", introduceDictionary(dictFile), text) == "bell");
+    text = "blokod";
+    REQUIRE(excessLetter("blokod", introduceDictionary(dictFile), text) == "blood");
+    text = "sfmooth";
+    REQUIRE(excessLetter("sfmooth", introduceDictionary(dictFile), text) == "smooth");
 }
 
 TEST_CASE("lowerCase", "CorrectWork")
@@ -39,27 +45,40 @@ TEST_CASE("lowerCase", "CorrectWork")
 TEST_CASE("Missing Letter", "Correct")
 {
     string dictFile = "dictionary.txt";
-    REQUIRE(missingLetter("blok", introduceDictionary(dictFile)) == "block");
-    REQUIRE(missingLetter("pple", introduceDictionary(dictFile)) == "apple");
-    REQUIRE(missingLetter("joe", introduceDictionary(dictFile)) == "joke");
-    REQUIRE(missingLetter("wor", introduceDictionary(dictFile)) == "work");
+    string text = "blok";
+    REQUIRE(missingLetter("blok", introduceDictionary(dictFile), text) == "block");
+    text = "pple";
+    REQUIRE(missingLetter("pple", introduceDictionary(dictFile), text) == "apple");
+    text = "joe";
+    REQUIRE(missingLetter("joe", introduceDictionary(dictFile), text) == "joke");
+    text = "wor";
+    REQUIRE(missingLetter("wor", introduceDictionary(dictFile), text) == "work");
 }
 
 TEST_CASE("swapLetters", "CorrectWork")
 {
     string dictFile = "dictionary.txt";
-    REQUIRE(swapLetters("helol", introduceDictionary(dictFile)) == "hello");
-    REQUIRE(swapLetters("aplpe", introduceDictionary(dictFile)) == "apple");
-    REQUIRE(swapLetters("actino", introduceDictionary(dictFile)) == "action");
-    REQUIRE(swapLetters("abues", introduceDictionary(dictFile)) == "abuse");
+    string text = "helol";
+    REQUIRE(swapLetters("helol", introduceDictionary(dictFile), text) == "hello");
+    text = "aplpe";
+    REQUIRE(swapLetters("aplpe", introduceDictionary(dictFile), text) == "apple");
+    text = "actino";
+    REQUIRE(swapLetters("actino", introduceDictionary(dictFile), text) == "action");
+    text = "abues";
+    REQUIRE(swapLetters("abues", introduceDictionary(dictFile), text) == "abuse");
 }
 
 TEST_CASE("WrongLetter", "Correct")
 {
     string dictFile = "dictionary.txt";
-    REQUIRE(wrongLetter("frink", introduceDictionary(dictFile)) == "drink");
-    REQUIRE(wrongLetter("abone", introduceDictionary(dictFile)) == "alone");
-    REQUIRE(wrongLetter("delp", introduceDictionary(dictFile)) == "help");
-    REQUIRE(wrongLetter("suiside", introduceDictionary(dictFile)) == "suicide");
-    REQUIRE(wrongLetter("death", introduceDictionary(dictFile)) == "death");
+    string text = "frink";
+    REQUIRE(wrongLetter("frink", introduceDictionary(dictFile), text) == "drink");
+    text = "abone";
+    REQUIRE(wrongLetter("abone", introduceDictionary(dictFile), text) == "alone");
+    text = "delp";
+    REQUIRE(wrongLetter("delp", introduceDictionary(dictFile), text) == "help");
+    text = "suiside";
+    REQUIRE(wrongLetter("suiside", introduceDictionary(dictFile), text) == "suicide");
+    text = "death";
+    REQUIRE(wrongLetter("death", introduceDictionary(dictFile), text) == "death");
 }
