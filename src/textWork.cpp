@@ -12,7 +12,7 @@ string lowerCase(string& str)
     return str;
 }
 
-void inputText()
+string inputText()
 {
     ofstream write;
     string inputFile = "input.txt";
@@ -23,6 +23,8 @@ void inputText()
     write << text;
 
     write.close();
+
+    return text;
 }
 
 void clearText(string readFile, string writeFile)

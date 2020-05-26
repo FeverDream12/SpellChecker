@@ -9,11 +9,13 @@ using namespace std;
 int main()
 {
     cout << "Enter text" << endl;
-    inputText();
+    string text = inputText();
+    text = lowerCase(text);
     string inputFile = "input.txt";
     string cleanText = "clean.txt";
     string dictFile = "dictionary.txt";
     clearText(inputFile, cleanText);
-    checkText(cleanText, introduceDictionary(dictFile));
+    text = checkText(cleanText, introduceDictionary(dictFile), text);
+    cout << endl << text << endl;
     return 0;
 }
