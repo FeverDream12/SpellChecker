@@ -108,7 +108,7 @@ void checkText(string filename, unordered_set<string> Dictionary)
             lowerCase(word);
             cout << word;
             if (Dictionary.find(word) != Dictionary.end()) {
-                cout << " -> correct word" << endl;
+                cout << "\033[1;32m -> correct word \033[0m" << endl;
             } else {
                 string wordContainer = swapLetters(word, Dictionary);
                 if (wordContainer.empty()) {
@@ -118,23 +118,22 @@ void checkText(string filename, unordered_set<string> Dictionary)
                         if (wordContainer.empty()) {
                             wordContainer = wrongLetter(word, Dictionary);
                             if (wordContainer.empty()) {
-                                cout << " unknown or nonexistent word "
-                                     << wordContainer << endl;
+                                cout << "\033[1;31m -> unknown or nonexisted word \033[0m"<<endl;
                             } else {
-                                cout << " -> uncorrect word, maybe you mean "
-                                        "-->> "
-                                     << wordContainer << endl;
+                              cout << "\033[1;33m -> uncorrect word, maybe you mean -->> \033[0m"
+                                   << wordContainer << endl;
                             }
                         } else {
-                            cout << " -> uncorrect word, maybe you mean -->> "
-                                 << wordContainer << endl;
+                          cout << " \033[1;33m -> uncorrect word, maybe you mean -->> \033[0m"
+                               << wordContainer << endl;
                         }
                     } else {
-                        cout << " -> uncorrect word, maybe you mean -->> "
-                             << wordContainer << endl;
+                      cout << " \033[1;33m -> uncorrect word, maybe you mean -->> \033[0m"
+                           << wordContainer << endl;
                     }
+
                 } else {
-                    cout << " -> uncorrect word, maybe you mean -->> "
+                    cout << " \033[1;33m-> uncorrect word, maybe you mean -->> \033[0m"
                          << wordContainer << endl;
                 }
             }
