@@ -23,21 +23,28 @@ unordered_set<string> introduceDictionary(string filename)
     return Dictionary;
 }
 
-string excessLetter(string word, unordered_set<string> Dictionary)
+string excessLetter(string word, unordered_set<string> Dictionary, string& text)
 {
-    string result;
     int wordSize = word.size();
-    for (int i = 0; i < wordSize; ++i) {
+    string result;
+    for (int i = 0; i < wordSize; i++) {
         string newWord = word;
         newWord = newWord.erase(i, 1);
         if (Dictionary.find(newWord) != Dictionary.end()) {
             result = newWord;
+            int fPos = text.find(word);
+            text.replace(
+                    text.begin() + fPos,
+                    text.begin() + fPos + word.size(),
+                    result);
+            break;
         }
     }
     return result;
 }
 
-string missingLetter(string word, unordered_set<string> Dictionary, string& text)
+string
+missingLetter(string word, unordered_set<string> Dictionary, string& text)
 {
     bool find = false;
     string alfavit = "abcdefghijklmnopqrstuvwxyz";
@@ -58,7 +65,7 @@ string missingLetter(string word, unordered_set<string> Dictionary, string& text
                 find = true;
             }
         }
-        if (flag) {
+        if (find) {
             break;
         } else {
             swap(newWord[i], newWord[i + 1]);
@@ -67,7 +74,7 @@ string missingLetter(string word, unordered_set<string> Dictionary, string& text
     return result;
 }
 
-string swapLetters(string word, unordered_set<string> Dictionary)
+string swapLetters(string word, unordered_set<string> Dictionary, string& text)
 {
     int wordSize = word.size();
     string result;
@@ -76,6 +83,12 @@ string swapLetters(string word, unordered_set<string> Dictionary)
         swap(newWord[i], newWord[i + 1]);
         if (Dictionary.find(newWord) != Dictionary.end()) {
             result = newWord;
+            int wordPosition = text.find(word);
+
+            text.replace(
+                    text.begin() + wordPosition,
+                    text.begin() + wordPosition + word.size(),
+                    result);
         }
     }
     return result;
@@ -83,13 +96,13 @@ string swapLetters(string word, unordered_set<string> Dictionary)
 
 string wrongLetter(string word, unordered_set<string> Dictionary, string& text)
 {
-    bool find =  false;
+    bool find = false;
     string alfavit = "abcdefghijklmnopqrstuvwxyz";
     string result;
     string newWord = word;
     int wordSize = newWord.size();
     for (int i = 0; i < wordSize; i++) {
-      newWord = word;
+        newWord = word;
         for (int j = 0; j < 26; j++) {
             newWord[i] = alfavit[j];
             if (Dictionary.find(newWord) != Dictionary.end()) {
@@ -103,14 +116,15 @@ string wrongLetter(string word, unordered_set<string> Dictionary, string& text)
                 break;
             }
         }
-        if (flag) {
+        if (find) {
             break;
         }
     }
     return result;
 }
 
-void checkText(string filename, unordered_set<string> Dictionary)
+string
+checkText(string filename, unordered_set<string> Dictionary, string& text)
 {
     ifstream read;
     read.open(filename);
@@ -122,26 +136,27 @@ void checkText(string filename, unordered_set<string> Dictionary)
             if (Dictionary.find(word) != Dictionary.end()) {
                 cout << "\033[1;32m -> correct word \033[0m" << endl;
             } else {
-                string wordContainer = swapLetters(word, Dictionary);
+                string wordContainer = swapLetters(word, Dictionary, text);
                 if (wordContainer.empty()) {
-                    wordContainer = excessLetter(word, Dictionary);
+                    wordContainer = excessLetter(word, Dictionary, text);
                     if (wordContainer.empty()) {
-                        wordContainer = missingLetter(word, Dictionary);
+                        wordContainer = missingLetter(word, Dictionary, text);
                         if (wordContainer.empty()) {
-                            wordContainer = wrongLetter(word, Dictionary);
+                            wordContainer = wrongLetter(word, Dictionary, text);
                             if (wordContainer.empty()) {
-                                cout << "\033[1;31m -> unknown or nonexisted word \033[0m"<<endl;
+                                cout << "\033[1;31m -> unknown or nonexisted word \033[0m"
+                                     << endl;
                             } else {
-                              cout << "\033[1;33m -> uncorrect word, maybe you mean -->> \033[0m"
-                                   << wordContainer << endl;
+                                cout << "\033[1;33m -> uncorrect word, maybe you mean -->> \033[0m"
+                                     << wordContainer << endl;
                             }
                         } else {
-                          cout << " \033[1;33m -> uncorrect word, maybe you mean -->> \033[0m"
-                               << wordContainer << endl;
+                            cout << " \033[1;33m -> uncorrect word, maybe you mean -->> \033[0m"
+                                 << wordContainer << endl;
                         }
                     } else {
-                      cout << " \033[1;33m -> uncorrect word, maybe you mean -->> \033[0m"
-                           << wordContainer << endl;
+                        cout << " \033[1;33m -> uncorrect word, maybe you mean -->> \033[0m"
+                             << wordContainer << endl;
                     }
 
                 } else {
@@ -153,4 +168,5 @@ void checkText(string filename, unordered_set<string> Dictionary)
     } else {
         cout << "Could not open file : " << filename << endl;
     }
+    return text;
 }
