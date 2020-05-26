@@ -46,14 +46,15 @@ string excessLetter(string word, unordered_set<string> Dictionary, string& text)
 string
 missingLetter(string word, unordered_set<string> Dictionary, string& text)
 {
-    bool find = false;
-    string alfavit = "abcdefghijklmnopqrstuvwxyz";
+    bool wordFinded = false;
+    string alphabet = "abcdefghijklmnopqrstuvwxyz";
     string result;
     string newWord = "_" + word;
     int wordSize = newWord.size();
+    int alphabetSize = alphabet.size();
     for (int i = 0; i < wordSize; i++) {
-        for (int j = 0; j < 26; j++) {
-            newWord[i] = alfavit[j];
+        for (int j = 0; j < alphabetSize; j++) {
+            newWord[i] = alphabet[j];
             if (Dictionary.find(newWord) != Dictionary.end()) {
                 result = newWord;
                 int wordPosition = text.find(word);
@@ -62,10 +63,10 @@ missingLetter(string word, unordered_set<string> Dictionary, string& text)
                         text.begin() + wordPosition,
                         text.begin() + wordPosition + word.size(),
                         result);
-                find = true;
+                wordFinded = true;
             }
         }
-        if (find) {
+        if (wordFinded) {
             break;
         } else {
             swap(newWord[i], newWord[i + 1]);
@@ -96,15 +97,16 @@ string swapLetters(string word, unordered_set<string> Dictionary, string& text)
 
 string wrongLetter(string word, unordered_set<string> Dictionary, string& text)
 {
-    bool find = false;
-    string alfavit = "abcdefghijklmnopqrstuvwxyz";
+    bool wordFinded = false;
+    string alphabet = "abcdefghijklmnopqrstuvwxyz";
     string result;
     string newWord = word;
     int wordSize = newWord.size();
+    int alphabetSize = alphabet.size();
     for (int i = 0; i < wordSize; i++) {
         newWord = word;
-        for (int j = 0; j < 26; j++) {
-            newWord[i] = alfavit[j];
+        for (int j = 0; j < alphabetSize; j++) {
+            newWord[i] = alphabet[j];
             if (Dictionary.find(newWord) != Dictionary.end()) {
                 result = newWord;
                 int wordPosition = text.find(word);
@@ -112,11 +114,11 @@ string wrongLetter(string word, unordered_set<string> Dictionary, string& text)
                         text.begin() + wordPosition,
                         text.begin() + wordPosition + word.size(),
                         result);
-                find = true;
+                wordFinded = true;
                 break;
             }
         }
-        if (find) {
+        if (wordFinded) {
             break;
         }
     }
