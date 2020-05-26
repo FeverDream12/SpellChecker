@@ -9,7 +9,8 @@ using namespace std;
 int main()
 {
     cout << "Enter text" << endl;
-    inputText();
+    string text;
+    text = inputText();
     string inputFile = "input.txt";
     string cleanText = "clean.txt";
     string dictFile = "dictionary.txt";
