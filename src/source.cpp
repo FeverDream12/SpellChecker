@@ -23,14 +23,14 @@ unordered_set<string> introduceDictionary(string filename)
     return Dictionary;
 }
 
-string excessLetter(string word, unordered_set<string> Dictionary, string& text)
+string excessLetter(string word, unordered_set<string> dict, string& text)
 {
     int wordSize = word.size();
     string result;
     for (int i = 0; i < wordSize; i++) {
         string newWord = word;
         newWord = newWord.erase(i, 1);
-        if (Dictionary.find(newWord) != Dictionary.end()) {
+        if (dict.find(newWord) != dict.end()) {
             result = newWord;
             int fPos = text.find(word);
             text.replace(
@@ -43,8 +43,7 @@ string excessLetter(string word, unordered_set<string> Dictionary, string& text)
     return result;
 }
 
-string
-missingLetter(string word, unordered_set<string> Dictionary, string& text)
+string missingLetter(string word, unordered_set<string> dict, string& text)
 {
     bool wordFinded = false;
     string alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -55,7 +54,7 @@ missingLetter(string word, unordered_set<string> Dictionary, string& text)
     for (int i = 0; i < wordSize; i++) {
         for (int j = 0; j < alphabetSize; j++) {
             newWord[i] = alphabet[j];
-            if (Dictionary.find(newWord) != Dictionary.end()) {
+            if (dict.find(newWord) != dict.end()) {
                 result = newWord;
                 int wordPosition = text.find(word);
 
@@ -75,14 +74,14 @@ missingLetter(string word, unordered_set<string> Dictionary, string& text)
     return result;
 }
 
-string swapLetters(string word, unordered_set<string> Dictionary, string& text)
+string swapLetters(string word, unordered_set<string> dict, string& text)
 {
     int wordSize = word.size();
     string result;
     for (int i = 0; i < wordSize; i++) {
         string newWord = word;
         swap(newWord[i], newWord[i + 1]);
-        if (Dictionary.find(newWord) != Dictionary.end()) {
+        if (dict.find(newWord) != dict.end()) {
             result = newWord;
             int wordPosition = text.find(word);
 
@@ -95,7 +94,7 @@ string swapLetters(string word, unordered_set<string> Dictionary, string& text)
     return result;
 }
 
-string wrongLetter(string word, unordered_set<string> Dictionary, string& text)
+string wrongLetter(string word, unordered_set<string> dict, string& text)
 {
     bool wordFinded = false;
     string alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -107,7 +106,7 @@ string wrongLetter(string word, unordered_set<string> Dictionary, string& text)
         newWord = word;
         for (int j = 0; j < alphabetSize; j++) {
             newWord[i] = alphabet[j];
-            if (Dictionary.find(newWord) != Dictionary.end()) {
+            if (dict.find(newWord) != dict.end()) {
                 result = newWord;
                 int wordPosition = text.find(word);
                 text.replace(
@@ -125,44 +124,49 @@ string wrongLetter(string word, unordered_set<string> Dictionary, string& text)
     return result;
 }
 
-string
-checkText(string filename, unordered_set<string> Dictionary, string& text)
+string checkText(string filename, unordered_set<string> dict, string& text)
 {
     ifstream read;
+    string wordContainer;
     read.open(filename);
     if (read.is_open()) {
         string word;
         while (read >> word) {
             lowerCase(word);
             cout << word;
-            if (Dictionary.find(word) != Dictionary.end()) {
+            if (dict.find(word) != dict.end()) {
                 cout << "\033[1;32m -> correct word \033[0m" << endl;
             } else {
-                string wordContainer = swapLetters(word, Dictionary, text);
+                wordContainer = swapLetters(word, dict, text);
                 if (wordContainer.empty()) {
-                    wordContainer = excessLetter(word, Dictionary, text);
+                    wordContainer = excessLetter(word, dict, text);
                     if (wordContainer.empty()) {
-                        wordContainer = missingLetter(word, Dictionary, text);
+                        wordContainer = missingLetter(word, dict, text);
                         if (wordContainer.empty()) {
-                            wordContainer = wrongLetter(word, Dictionary, text);
+                            wordContainer = wrongLetter(word, dict, text);
                             if (wordContainer.empty()) {
-                                cout << "\033[1;31m -> unknown or nonexisted word \033[0m"
+                                cout << "\033[1;31m -> unknown or\033[0m"
+                                     << "\033[1;31m nonexisted word \033[0m"
                                      << endl;
                             } else {
-                                cout << "\033[1;33m -> uncorrect word, maybe you mean -->> \033[0m"
+                                cout << "\033[1;33m -> uncorrect word, \033[0m"
+                                     << "\033[1;33mmaybe you mean -->> \033[0m"
                                      << wordContainer << endl;
                             }
                         } else {
-                            cout << " \033[1;33m -> uncorrect word, maybe you mean -->> \033[0m"
+                            cout << "\033[1;33m -> uncorrect word, \033[0m"
+                                 << "\033[1;33mmaybe you mean -->> \033[0m"
                                  << wordContainer << endl;
                         }
                     } else {
-                        cout << " \033[1;33m -> uncorrect word, maybe you mean -->> \033[0m"
+                        cout << "\033[1;33m -> uncorrect word, \033[0m"
+                             << "\033[1;33mmaybe you mean -->> \033[0m"
                              << wordContainer << endl;
                     }
 
                 } else {
-                    cout << " \033[1;33m-> uncorrect word, maybe you mean -->> \033[0m"
+                    cout << "\033[1;33m -> uncorrect word, \033[0m"
+                         << "\033[1;33mmaybe you mean -->> \033[0m"
                          << wordContainer << endl;
                 }
             }
