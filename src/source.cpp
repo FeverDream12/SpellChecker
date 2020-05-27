@@ -32,10 +32,10 @@ string excessLetter(string word, unordered_set<string> dict, string& text)
         newWord = newWord.erase(i, 1);
         if (dict.find(newWord) != dict.end()) {
             result = newWord;
-            int fPos = text.find(word);
+            int wordPosition = text.find(word);
             text.replace(
-                    text.begin() + fPos,
-                    text.begin() + fPos + word.size(),
+                    text.begin() + wordPosition,
+                    text.begin() + wordPosition + word.size(),
                     result);
             break;
         }
@@ -63,6 +63,7 @@ string missingLetter(string word, unordered_set<string> dict, string& text)
                         text.begin() + wordPosition + word.size(),
                         result);
                 wordFinded = true;
+                break;
             }
         }
         if (wordFinded) {
