@@ -53,6 +53,9 @@ TEST_CASE("MissingLetter", "CorrectWork")
     REQUIRE(missingLetter("joe", introduceDictionary(dict), text, 0) == "joke");
     text = "wor";
     REQUIRE(missingLetter("wor", introduceDictionary(dict), text, 0) == "word");
+    text = "bok";
+    REQUIRE(missingLetter("bok", introduceDictionary(dict), text, 0) == "book");
+
 }
 
 TEST_CASE("SwapLetters", "CorrectWork")
