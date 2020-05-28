@@ -4,6 +4,5 @@ dist: xenial
 
 script:
   - git ls-files src/*.cpp | xargs clang-format -i && git diff --exit-code
-  - git ls-files test/ | xargs clang-format -i && git diff --exit-code
   - make
   - make test
