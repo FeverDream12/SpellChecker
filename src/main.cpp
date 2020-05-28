@@ -8,7 +8,7 @@ using namespace std;
 
 int main()
 {
-    cout << "Enter text" << endl;
+    cout << "Enter text:\n";
     string text = inputText();
     text = lowerCase(text);
     string inputFile = "input.txt";
@@ -16,6 +16,6 @@ int main()
     string dictFile = "dictionary.txt";
     clearText(inputFile, cleanText);
     text = checkText(cleanText, introduceDictionary(dictFile), text);
-    cout << endl << text << endl;
+    cout << "\nCorrected text: \n" << text << endl;
     return 0;
 }
