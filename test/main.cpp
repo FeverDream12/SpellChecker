@@ -72,13 +72,13 @@ TEST_CASE("WrongLetter", "Correct")
 {
     string dict = "dictionary.txt";
     string text = "frink";
-    REQUIRE(wrongLetter("frink", introduceDictionary(dict), text, 0) == "drink");
+    REQUIRE(wrongLetter("frink", introduceDictionary(dict), text, 0) == "brink");
     text = "abone";
     REQUIRE(wrongLetter("abone", introduceDictionary(dict), text, 0) == "alone");
     text = "delp";
     REQUIRE(wrongLetter("delp", introduceDictionary(dict), text, 0) == "help");
     text = "beld";
-    REQUIRE(wrongLetter("beld", introduceDictionary(dict), text, 0) == "bend");
-    text = "death";
-    REQUIRE(wrongLetter("death", introduceDictionary(dict), text, 0) == "death");
+    REQUIRE(wrongLetter("beld", introduceDictionary(dict), text, 0) == "held");
+    text = "deatz";
+    REQUIRE(wrongLetter("deatz", introduceDictionary(dict), text, 0) == "death");
 }
