@@ -8,12 +8,21 @@ using namespace std;
 
 int main()
 {
-    cout << "Enter text" << endl;
-    inputText();
+    cout << "Enter text:\n";
+    string text = inputText();
+    text = lowerCase(text);
     string inputFile = "input.txt";
     string cleanText = "clean.txt";
     string dictFile = "dictionary.txt";
     clearText(inputFile, cleanText);
-    checkText(cleanText, introduceDictionary(dictFile));
+    text = checkText(cleanText, introduceDictionary(dictFile), text);
+    cout << "\nCorrected text: \n" << text << endl;
+
+    ofstream write;
+    string correctedText = "corrected.txt";
+    write.open(correctedText);
+    write << text;
+    write.close();
+
     return 0;
 }

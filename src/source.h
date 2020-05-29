@@ -1,11 +1,10 @@
 #include <iostream>
 #include <string>
 #include <unordered_set>
-using namespace std;
 #pragma once
-unordered_set<string> introduceDictionary(string filename);
-string excessLetter(string word, unordered_set<string> Dictionary);
-void checkText(string filename, unordered_set<string> Dictionary);
-string missingLetter(string word, unordered_set<string> Dictionary);
-string swapLetters(string word, unordered_set<string> Dictionary);
-string wrongLetter(string word, unordered_set<string> Dictionary);
+std::unordered_set<std::string> introduceDictionary(std::string filename);
+std::string excessLetter(std::string word, std::unordered_set<std::string> dict, std::string& text, int findHelper);
+std::string checkText(std::string filename, std::unordered_set<std::string> dict, std::string& text);
+std::string missingLetter(std::string word, std::unordered_set<std::string> dict, std::string& text, int findHelper);
+std::string swapLetters(std::string word, std::unordered_set<std::string> dict, std::string& text, int findHelper);
+std::string wrongLetter(std::string word, std::unordered_set<std::string> dict, std::string& text, int findHelper);
