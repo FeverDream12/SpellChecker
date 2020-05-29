@@ -50,7 +50,7 @@ TEST_CASE("MissingLetter", "CorrectWork")
     text = "pple";
     REQUIRE(missingLetter("pple", introduceDictionary(dict), text, 0) == "apple");
     text = "joe";
-    REQUIRE(missingLetter("joe", introduceDictionary(dict), text, 0) == "joke");
+    REQUIRE(missingLetter("joe", introduceDictionary(dict), text, 0) == "joie");
     text = "wor";
     REQUIRE(missingLetter("wor", introduceDictionary(dict), text, 0) == "word");
     text = "bok";
@@ -81,7 +81,7 @@ TEST_CASE("WrongLetter", "Correct")
     text = "delp";
     REQUIRE(wrongLetter("delp", introduceDictionary(dict), text, 0) == "help");
     text = "beld";
-    REQUIRE(wrongLetter("beld", introduceDictionary(dict), text, 0) == "held");
+    REQUIRE(wrongLetter("beld", introduceDictionary(dict), text, 0) == "geld");
     text = "deatz";
     REQUIRE(wrongLetter("deatz", introduceDictionary(dict), text, 0) == "death");
 }
