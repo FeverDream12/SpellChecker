@@ -17,5 +17,12 @@ int main()
     clearText(inputFile, cleanText);
     text = checkText(cleanText, introduceDictionary(dictFile), text);
     cout << "\nCorrected text: \n" << text << endl;
+
+    ofstream write;
+    string correctedText = "corrected.txt";
+    write.open(correctedText);
+    write << text;
+    write.close();
+    
     return 0;
 }
