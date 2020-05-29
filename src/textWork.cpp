@@ -33,16 +33,17 @@ void clearText(string readFile, string writeFile)
     ofstream write;
     read.open(readFile);
     write.open(writeFile);
+    const unsigned int notFounded = 4294967295;
 
     string word;
     while (read >> word) {
         string symb = ".()-:!?[]*%;#№@$&+=_";
-        while (word.rfind(",") != 4294967295
+        while (word.rfind(",") != notFounded
                && word.rfind(",") == word.length() - 1) {
             word = word.erase(word.rfind(","), 1);
         }
         for (int i = 0; i < 22; i++) {
-            while (word.rfind(symb[i]) != 4294967295
+            while (word.rfind(symb[i]) != notFounded
                    && (word.rfind(symb[i]) == word.length() - 1
                        || word.rfind(symb[i]) == word.length() - word.size())) {
                 word = word.erase(word.rfind(symb[i]), 1);
