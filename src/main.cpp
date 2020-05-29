@@ -23,6 +23,6 @@ int main()
     write.open(correctedText);
     write << text;
     write.close();
-    
+
     return 0;
 }
