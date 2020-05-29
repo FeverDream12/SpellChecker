@@ -23,36 +23,53 @@ unordered_set<string> introduceDictionary(string filename)
     return Dictionary;
 }
 
-string excessLetter(string word, unordered_set<string> Dictionary)
+string excessLetter(
+        string word, unordered_set<string> dict, string& text, int findHelper)
 {
-    string result;
     int wordSize = word.size();
-    for (int i = 0; i < wordSize; ++i) {
+    string result;
+    for (int i = 0; i < wordSize; i++) {
         string newWord = word;
         newWord = newWord.erase(i, 1);
-        if (Dictionary.find(newWord) != Dictionary.end()) {
+        if (dict.find(newWord) != dict.end()) {
             result = newWord;
+            int wordPosition = text.find(word, findHelper);
+
+            text.replace(
+                    text.begin() + wordPosition,
+                    text.begin() + wordPosition + word.size(),
+                    result);
+            break;
         }
     }
     return result;
 }
 
-string missingLetter(string word, unordered_set<string> Dictionary)
+string missingLetter(
+        string word, unordered_set<string> dict, string& text, int findHelper)
 {
-    int flag = 0;
-    string alfavit = "abcdefghijklmnopqrstuvwxyz";
+    bool wordFinded = false;
+    string alphabet = "abcdefghijklmnopqrstuvwxyz";
     string result;
     string newWord = "_" + word;
     int wordSize = newWord.size();
+    int alphabetSize = alphabet.size();
     for (int i = 0; i < wordSize; i++) {
-        for (int j = 0; j < 27; j++) {
-            newWord[i] = alfavit[j];
-            if (Dictionary.find(newWord) != Dictionary.end()) {
+        for (int j = 0; j < alphabetSize; j++) {
+            newWord[i] = alphabet[j];
+            if (dict.find(newWord) != dict.end()) {
                 result = newWord;
-                flag = 1;
+                int wordPosition = text.find(word, findHelper);
+
+                text.replace(
+                        text.begin() + wordPosition,
+                        text.begin() + wordPosition + word.size(),
+                        result);
+                wordFinded = true;
+                break;
             }
         }
-        if (flag) {
+        if (wordFinded) {
             break;
         } else {
             swap(newWord[i], newWord[i + 1]);
@@ -61,34 +78,49 @@ string missingLetter(string word, unordered_set<string> Dictionary)
     return result;
 }
 
-string swapLetters(string word, unordered_set<string> Dictionary)
+string swapLetters(
+        string word, unordered_set<string> dict, string& text, int findHelper)
 {
     int wordSize = word.size();
     string result;
     for (int i = 0; i < wordSize; i++) {
         string newWord = word;
         swap(newWord[i], newWord[i + 1]);
-        if (Dictionary.find(newWord) != Dictionary.end()) {
+        if (dict.find(newWord) != dict.end()) {
             result = newWord;
+            int wordPosition = text.find(word, findHelper);
+
+            text.replace(
+                    text.begin() + wordPosition,
+                    text.begin() + wordPosition + word.size(),
+                    result);
         }
     }
     return result;
 }
 
-string wrongLetter(string word, unordered_set<string> Dictionary)
+string wrongLetter(
+        string word, unordered_set<string> dict, string& text, int findHelper)
 {
     bool wordFinded = false;
-    string alfavit = "abcdefghijklmnopqrstuvwxyz";
+    string alphabet = "abcdefghijklmnopqrstuvwxyz";
     string result;
-    string bufWord = word;
-    int wordSize = word.size();
+    string newWord = word;
+    int wordSize = newWord.size();
+    int alphabetSize = alphabet.size();
     for (int i = 0; i < wordSize; i++) {
-        word = bufWord;
-        for (int j = 0; j < 27; j++) {
-            word[i] = alfavit[j];
-            if (Dictionary.find(word) != Dictionary.end()) {
-                result = word;
+        newWord = word;
+        for (int j = 0; j < alphabetSize; j++) {
+            newWord[i] = alphabet[j];
+            if (dict.find(newWord) != dict.end()) {
+                result = newWord;
+                int wordPosition = text.find(word, findHelper);
+                text.replace(
+                        text.begin() + wordPosition,
+                        text.begin() + wordPosition + word.size(),
+                        result);
                 wordFinded = true;
+                break;
             }
         }
         if (wordFinded) {
@@ -98,48 +130,57 @@ string wrongLetter(string word, unordered_set<string> Dictionary)
     return result;
 }
 
-void checkText(string filename, unordered_set<string> Dictionary)
+string checkText(string filename, unordered_set<string> dict, string& text)
 {
+    int pos = 0;
     ifstream read;
+    string wordContainer;
     read.open(filename);
     if (read.is_open()) {
         string word;
         while (read >> word) {
             lowerCase(word);
             cout << word;
-            if (Dictionary.find(word) != Dictionary.end()) {
-                cout << " -> correct word" << endl;
+            if (dict.find(word) != dict.end()) {
+                cout << "\033[1;32m -> correct word \033[0m\n";
             } else {
-                string wordContainer = swapLetters(word, Dictionary);
+                wordContainer = swapLetters(word, dict, text, pos);
                 if (wordContainer.empty()) {
-                    wordContainer = excessLetter(word, Dictionary);
+                    wordContainer = excessLetter(word, dict, text, pos);
                     if (wordContainer.empty()) {
-                        wordContainer = missingLetter(word, Dictionary);
+                        wordContainer = missingLetter(word, dict, text, pos);
                         if (wordContainer.empty()) {
-                            wordContainer = wrongLetter(word, Dictionary);
+                            wordContainer = wrongLetter(word, dict, text, pos);
                             if (wordContainer.empty()) {
-                                cout << " unknown or nonexistent word "
-                                     << wordContainer << endl;
+                                cout << "\033[1;31m -> unknown or\033[0m"
+                                     << "\033[1;31m nonexisted word \033[0m\n";
                             } else {
-                                cout << " -> uncorrect word, maybe you mean "
-                                        "-->> "
+                                cout << "\033[1;33m -> uncorrect word, \033[0m"
+                                     << "\033[1;33mmaybe you mean -->> \033[0m"
                                      << wordContainer << endl;
                             }
                         } else {
-                            cout << " -> uncorrect word, maybe you mean -->> "
+                            cout << "\033[1;33m -> uncorrect word, \033[0m"
+                                 << "\033[1;33mmaybe you mean -->> \033[0m"
                                  << wordContainer << endl;
                         }
                     } else {
-                        cout << " -> uncorrect word, maybe you mean -->> "
+                        pos--;
+                        cout << "\033[1;33m -> uncorrect word, \033[0m"
+                             << "\033[1;33mmaybe you mean -->> \033[0m"
                              << wordContainer << endl;
                     }
+
                 } else {
-                    cout << " -> uncorrect word, maybe you mean -->> "
+                    cout << "\033[1;33m -> uncorrect word, \033[0m"
+                         << "\033[1;33mmaybe you mean -->> \033[0m"
                          << wordContainer << endl;
                 }
             }
+            pos += word.size() + 1;
         }
     } else {
         cout << "Could not open file : " << filename << endl;
     }
+    return text;
 }

@@ -12,7 +12,7 @@ string lowerCase(string& str)
     return str;
 }
 
-void inputText()
+string inputText()
 {
     ofstream write;
     string inputFile = "input.txt";
@@ -23,6 +23,8 @@ void inputText()
     write << text;
 
     write.close();
+
+    return text;
 }
 
 void clearText(string readFile, string writeFile)
@@ -40,7 +42,9 @@ void clearText(string readFile, string writeFile)
             word = word.erase(word.rfind(","), 1);
         }
         for (int i = 0; i < 22; i++) {
-            while (word.rfind(symb[i]) != 4294967295) {
+            while (word.rfind(symb[i]) != 4294967295
+                   && (word.rfind(symb[i]) == word.length() - 1
+                       || word.rfind(symb[i]) == word.length() - word.size())) {
                 word = word.erase(word.rfind(symb[i]), 1);
             }
         }

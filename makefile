@@ -17,7 +17,7 @@ all: ./bin/SpellChecker
 ./build/source.o: ./src/source.cpp ./src/textWork.h
 		$(g) $(CFLAGS) -o build/source.o -c src/source.cpp -lm
 
-test: bin/spell-test
+test: bin/spell-test testRun
 
 bin/spell-test: build/test/main.o build/source.o build/textWork.o
 		$(g) -o bin/spell-test build/test/main.o build/source.o build/textWork.o
