@@ -8,6 +8,7 @@ using namespace std;
 
 int main()
 {
+    // hello
     cout << "Enter text:\n";
     string text = inputText();
     text = lowerCase(text);
